@@ -1,0 +1,261 @@
+/* SERVICES START */
+
+.services{
+	width: 100%;
+}
+
+/* SERVICES TITLE */
+
+.services-title {
+    width: 1000px;
+    height: 163px;
+    margin-left: 150px;
+    margin-top: 60px;
+}
+
+.title-head{
+	color: #000000;
+	font-size: 50px;
+	font-weight: bold;
+	font-style: normal;
+	line-height: 100px;
+	margin-left: 20px;
+	margin-top: 18px;
+}
+
+
+.title-par {
+    color: #000000;
+    font-size: 16px;
+    margin-left: 22px;
+    margin-top: -46px;
+	font-weight: normal;
+	text-align: justify;
+}
+
+/*  MAIN  */
+
+.services-main{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+.services-main > div{
+	padding: 20px;
+	margin: 10px;
+	text-align: flex-start;
+}
+.service-line{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	align-items: center;
+}
+.s-card{
+	text-align: flex-start;
+	width: 25%;
+	padding: 20px;
+	margin: 10px;
+}
+
+.services-main  h1{
+	font-size: 20px;
+    color:#000000;
+}
+.services-main  p{
+	font-size: 17px;
+}
+
+.btn-services{
+	padding: 13px 33px;
+    display: flex;
+    border: 1px solid #000000;
+    color: #000000;
+    border-radius: 4px;
+    background-color: transparent;
+}
+.special-item{
+	text-decoration: none;
+	color: #1475A2;
+}
+
+
+/*Medium devices (tablets, 768px and down)*/
+
+@media (max-width: 768px) {
+
+	.services-title {
+		width: 680px;
+		height: 200px;
+		margin-left: 27px;
+		margin-top: 60px;
+	}
+	
+	.title-head{
+		color: #000000;
+		font-size: 40px;
+		font-weight: bold;
+		font-style: normal;
+		line-height: 100px;
+		margin-left: 20px;
+		margin-top: 18px;
+	}		
+	.title-par {
+		color: #000000;
+		font-size: 14px;
+		margin-left: 22px;
+		margin-top: -46px;
+		font-weight: normal;
+		text-align: justify;
+	}
+
+	.services-main{
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-around;
+		width: 100%;
+	}
+	.service-line{
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		align-items: center;
+	}
+	.btn-services{
+		padding: 13px 33px;
+	    display: flex;
+	    color: #1475A2;
+	    border-radius: 4px;
+	    font-weight: bold;
+	    border: none;
+	    background-color: transparent;
+	}
+	.s-card{
+		width: 70%;
+	}
+	.icon-area{
+		text-align: flex-start;
+		margin-left: 40px;
+	}
+	.s-par{
+		margin-left: 10px;
+	}
+	.hr{
+		display: none;
+	}
+}
+
+@media (max-width: 500px) {
+	
+	.services-title {
+		width: 446px;
+		height: 251px;
+		margin-left: 27px;
+		margin-top: 60px;
+		background-color: red;
+	}
+	.title-head{
+		font-size: 30px;
+		margin-left: 0;
+	}
+	.title-par {
+		margin-left: 0;
+		margin-top: -33px;
+		font-weight: normal;
+		text-align: justify;
+	}
+	.s-card{
+		width: 100%;
+	}
+	.icon-area{
+		text-align: flex-start;
+		margin-left: 40px;
+	}
+	.services-main > div{
+		padding: 0;
+		margin: 0;
+		text-align: flex-start;
+	}
+	.btn-services{
+		padding: 13px 33px;
+	    display: flex;
+	    color: #1475A2;
+	    border-radius: 4px;
+	    font-weight: bold;
+	    border: none;
+	    background-color: transparent;
+	}
+	.icon-area{
+		text-align: flex-start;
+		margin-left: 10px;
+	}
+	.s-icon{
+		font-size: 18px;
+	}
+	.s-par{
+		margin-left: 20px;
+		font-size: 11px;
+	}
+	.rights {
+    	margin: 14px 17px 47px 0;
+	}
+}
+
+@media (max-width: 376px) {
+	
+	.services-title {
+		width: 364px;
+		height: 284px;
+		margin-left: 10px;
+		margin-top: 60px;
+		background-color: red;
+	}
+	.title-head{
+		font-size: 30px;
+		margin-left: 0;
+	}
+	.title-par {
+		margin-left: 0;
+		margin-top: -33px;
+		font-weight: normal;
+		text-align: justify;
+	}
+	.s-card{
+		width: 100%;
+	}
+	.icon-area{
+		text-align: flex-start;
+		margin-left: 40px;
+	}
+	.services-main > div{
+		padding: 0;
+		margin: 0;
+		text-align: flex-start;
+	}
+	.btn-services{
+		padding: 13px 33px;
+	    display: flex;
+	    color: #1475A2;
+	    border-radius: 4px;
+	    font-weight: bold;
+	    border: none;
+	    background-color: transparent;
+	}
+	.icon-area{
+		text-align: flex-start;
+		margin-left: 10px;
+	}
+	.s-icon{
+		font-size: 18px;
+	}
+	.s-par{
+		margin-left: 20px;
+		font-size: 11px;
+	}
+	.rights {
+    	margin: 14px 17px 47px 0;
+	}
+}
