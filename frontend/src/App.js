@@ -6,6 +6,9 @@ import {createStore} from "redux"
 import {Provider} from 'react-redux'
 import reducers from "./store/reducers"
 import Services from "./components/Services"
+import Gallery from "./components/Gallery";
+import ProjectName from "./components/ProjectName";
+
 
 
 
@@ -31,6 +34,9 @@ export class App extends Component {
           <Route path='/login' exact component={Login} /> 
           <Route path='/home' exact component={Home} /> 
           <Route path = "/services" exact component = {Services}/>
+          <Route path = "/home/gallery" exact component = {Gallery}/>
+          <Route path = "/gallery/project/:id" component = {ProjectName}/>
+
 
         </BrowserRouter>
       </Provider>

@@ -9,6 +9,7 @@ const corsOptions = {
 
 const AuthRouter = require("./router/AuthRouter")
 const ServicesRouter = require("./router/ServicesRouter")
+const GalleryRouter = require("./router/GalleryRouter")
 
 
 app.use(express.static(__dirname + "/public/"));
@@ -31,5 +32,6 @@ db.connect.sync()
 
 app.use("/login", AuthRouter)
 app.use("/services", ServicesRouter)
+app.use("/gallery", GalleryRouter)
 
 app.listen(8000, console.log("server running on 8000"));

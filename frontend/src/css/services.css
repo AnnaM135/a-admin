@@ -28,7 +28,7 @@
     color: #000000;
     font-size: 16px;
     margin-left: 22px;
-    margin-top: -46px;
+    margin-top: -25px;
 	font-weight: normal;
 	text-align: justify;
 }
@@ -43,7 +43,7 @@
 	flex-direction: column;
 }
 .services-main > div{
-	padding: 20px;
+	padding: 10px;
 	margin: 10px;
 	text-align: flex-start;
 }
