@@ -26,21 +26,21 @@ db.Gallery = Gallery
 db.ProjectName = ProjectName
 db.Information = Information
 
-// Admin - Services-Header
-db.Admin.hasMany(db.ServicesHeader, {as: "servicesHeader"})
-db.ServicesHeader.belongsTo(db.Admin, {foreignKey: "adminId", as: "admin"})
+// // Admin - Services-Header
+// db.Admin.hasMany(db.ServicesHeader, {as: "servicesHeader"})
+// db.ServicesHeader.belongsTo(db.Admin, {foreignKey: "adminId", as: "admin"})
 
 //Admin - Services-Info
-db.Admin.hasMany(db.ServicesInfo, {as: "servicesinfo"})
-db.ServicesInfo.belongsTo(db.Admin, {foreignKey: "adminId", as: "admin"})
+// db.Admin.hasMany(db.ServicesInfo, {as: "servicesinfo"})
+// db.ServicesInfo.belongsTo(db.Admin, {foreignKey: "adminId", as: "admin"})
 
-//Admin - Gallery
-db.Admin.hasMany(db.Gallery, {as: "gallery"})
-db.Gallery.belongsTo(db.Admin, {foreignKey: "adminId", as: "admin"})
+// //Admin - Gallery
+// db.Admin.hasMany(db.Gallery, {as: "gallery"})
+// db.Gallery.belongsTo(db.Admin, {foreignKey: "adminId", as: "admin"})
 
-//Admin - Project-Name
-db.Admin.hasMany(db.ProjectName, {as: "project_name"})
-db.ProjectName.belongsTo(db.Admin, {foreignKey: "adminId", as: "admin"})
+// //Admin - Project-Name
+// db.Admin.hasMany(db.ProjectName, {as: "project_name"})
+// db.ProjectName.belongsTo(db.Admin, {foreignKey: "adminId", as: "admin"})
 
 // //Gallery - Project-Name
 // db.Gallery.hasMany(db.ProjectName, {as: "project_name"})

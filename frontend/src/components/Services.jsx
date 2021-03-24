@@ -23,10 +23,10 @@ class Services extends React.Component{
             servicesInfo: [],
             showStore: false,
             description: "",
-            inp: {
+           
                 name: "",
                 title: "",
-            },
+            
             info: {
                 name: "",
                 title: "",
@@ -39,33 +39,67 @@ class Services extends React.Component{
                     id: ""
                 }
             },
-           showInfo: [],
+           showInfo_en: [],
+           showInfo_hy: [],
             errors: {}
         }
     }
     componentDidMount(){
-        console.log(this.props.langData.langId)
-        console.log(this.state.servicesInfo)
-       AdminService.getServicesDesc().then((r) =>{
-           if(r.data.id){
-                this.state.servicesInfo = r.data.servicesHeader
-                this.state.description = this.state.servicesInfo[0].description
+       AdminService.getServicesDesc().then(r =>{
+        console.log(r.data)
+        const arr = r.data
+        arr.forEach(elem=>{
+            if(elem.name === 'description'){
+                if(this.props.langData.langId == 1){
+                    this.state.description = elem.info_hy           
+                   this.setState({})
+                   return
+                   
+                }
+                this.state.description = elem.info_en
                 this.setState({})
-              AdminService.showInfo().then((r) => {
-                  this.state.showInfo = r.data.servicesinfo
-                  console.log(this.state.showInfo)
-                  this.setState({})
-              })  
-           }
-           else{
-               this.props.history.push("/login", "Please login")
-           }
+                
+            }
+        })
+        //    if(r.data.id){
+               
+        //         // this.state.servicesInfo = r.data.servicesHeader
+        //         // this.state.description = this.state.servicesInfo[0].description
+        //         // this.setState({})
+        //         // AdminService.showInfo().then((r) => {
+        //         //   this.state.showInfo = r.data.servicesinfo
+        //         //   console.log(this.state.showInfo)
+        //         //   this.setState({})
+        //         // })  
+        //         // AdminService.getLangInfo('description',this.props.langData.langId).then(r => {
+        //         //   console.log(r.data)
+        //         // })
+        //    }
+        //    else{
+        //        this.props.history.push("/login", "Please login")
+        //    }
+                 
        })
+       AdminService.showInfo().then((r) => {
+        let english = []
+        let armenian = []
+        r.data.forEach(elem=> {
+            if(elem.name_hy){
+                armenian = [...armenian,{name_hy:elem.name_hy,title_hy:elem.title_hy}]
+                return
+            }
+            english = [...english,{name_en:elem.name_en, title_en:elem.title_en}]
+        })
+        this.state.showInfo_en = english
+        this.state.showInfo_hy = armenian
+        this.setState({})
+      })  
 
     }
     handelChangeLang = (id) =>{
         this.props.changeData(id)
-        console.log(id)
+        this.componentDidMount()
+        
     }
     showEditInp(){
         if(this.state.showStore === false){
@@ -84,29 +118,28 @@ class Services extends React.Component{
     }
 
     changeInfo(e){
-        this.state.inp[e.target.getAttribute("data-id")] = e.target.value;
+        this.state.info[e.target.getAttribute("data-id")] = e.target.value;
         this.setState({})
     }
 
    
     editText(){
-        console.log(this.handelChangeLang)
-        console.log(this.state.description)
-       AdminService.addServicesDesc(this.state.description) 
+       AdminService.addServicesDesc(this.state.description, this.props.langData.langId, "description") 
        .then(r => {
-           swal("Good job!", "You checked Your Service Info!", "success")
-           window.location.reload()
+           console.log(r)
+        //    swal("Good job!", "You checked Your Service Info!", "success")
+        //    window.location.reload()
        })
        .catch((err => console.log(err)))
     }
-    edit(){
-        console.log(this.state.showInfo, this.props.langData.langId)
-        AdminService.editData(this.state.showInfo, this.props.langData.langId)
-        .then(r => {
-            console.log(r)
-        })
-        .catch((err) => console.log(err))
-    }
+    // edit(){
+    //     console.log(this.state.showInfo, this.props.langData.langId)
+    //     AdminService.editData(this.state.showInfo, this.props.langData.langId)
+    //     .then(r => {
+    //         console.log(r)
+    //     })
+    //     .catch((err) => console.log(err))
+    // }
     deleteInfo(id){
         AdminService.deleteServicesInfo(id).then((r) =>{
             this.state.showInfo.filter(x => {
@@ -122,18 +155,19 @@ class Services extends React.Component{
 
 
     addServiceInfo(){
-        AdminService.addInfo(this.state.inp)
+        AdminService.addInfo(this.state.info, this.props.langData.langId)
         .then((r) => {
-            this.state.info = r.data
-            this.state.info.name = r.data.name
-            this.state.info.title = r.data.title
-            swal("Good job!", "You clicked the button!", "success")
-            this.state.inp.name = ""
-            this.state.inp.title = ""
-            this.componentDidMount()
-            this.setState({})
-        })
-        .catch((err) => console.log(err))
+            //console.log(r.data)
+                // this.state.info = r.data
+                // this.state.info.name = r.data.name
+                // this.state.info.title = r.data.title
+                // swal("Good job!", "You clicked the button!", "success")
+                // this.state.inp.name = ""
+                // this.state.inp.title = ""
+                // this.componentDidMount()
+                // this.setState({})
+            })
+            .catch((err) => console.log(err))
     }
 
     render(){
@@ -152,22 +186,42 @@ class Services extends React.Component{
                 <br/><br/><br/>
                 <button>Add new Service</button>
                 <div className = "editInp">
-                    Name: <input className = "eInp" type="text" name="name" value = {this.state.inp.name} data-id="name" onChange = {this.changeInfo.bind(this)}/>
-                    Title: <input className = "eInp" type="text" name="title" value = {this.state.inp.title} data-id="title" onChange = {this.changeInfo.bind(this)}/>
+                    Name: <input className = "eInp" type="text" name="name" value = {this.state.info.name} data-id="name" onChange = {this.changeInfo.bind(this)}/>
+                    Title: <input className = "eInp" type="text" name="title" value = {this.state.info.title} data-id="title" onChange = {this.changeInfo.bind(this)}/>
                     <button className = "submit" onClick = {this.addServiceInfo.bind(this)}>Add</button>
                 </div>
             {
-                this.state.showInfo.map((a) => (
-                    <div key = {a.id} className="service-line">
+                this.props.langData.langId == 2 ? 
+                <>
+                    {this.state.showInfo_en.map(a=>(
+                        <div key = {a.id} className="service-line">
                         <div className="main-one s-card">
                             <button className = "btn-danger" onClick = {this.deleteInfo.bind(this, a.id)}><i className ="fa fa-trash-o" aria-hidden="true"></i></button>
-                            <h1>{a.name}</h1>
-                            <p>{a.title}</p>
+                            
+                            <h1>{a.name_en}</h1>
+                            <h1>{a.title_en}</h1>
+                            
                             <button className="btn-services"><Link to = "/services/outdoor" className = "special-item">LEARN MORE</Link></button>
                         </div>
                     </div>
-                ))
+                    ))}
+                </>:
+                <>
+                {this.state.showInfo_hy.map(a=>(
+                        <div key = {a.id} className="service-line">
+                        <div className="main-one s-card">
+                            <button className = "btn-danger" onClick = {this.deleteInfo.bind(this, a.id)}><i className ="fa fa-trash-o" aria-hidden="true"></i></button>
+                            
+                            <h1>{a.name_hy}</h1>
+                            <h1>{a.title_hy}</h1>
+                            
+                            <button className="btn-services"><Link to = "/services/outdoor" className = "special-item">LEARN MORE</Link></button>
+                        </div>
+                    </div>
+                    ))}
+                </>
             }
+
             </div>
             <Footer />
         </div>

@@ -5,7 +5,7 @@ import Axios from "axios"
 class AdminService {
     constructor() {
         this.api = Axios.create({
-            baseURL: "http://locahost:8000",
+            baseURL: "http://localhost:8000",
             headers: {
                 'Content-type': 'application/json'
             },
@@ -15,12 +15,15 @@ class AdminService {
     getServicesDesc() {
         return this.api.get("/services", { headers: AuthHeader() })
     }
-    addServicesDesc(data) {
+    // getLangInfo(name,id){
+    //     return this.api.get("/services/getLangInfo", {name, id},  { headers: AuthHeader() })
+    // }
+    addServicesDesc(data, id, name) {
         console.log({ headers: AuthHeader() })
-        return this.api.post("/services/add", {data}, { headers: AuthHeader() })
+        return this.api.post("/services/add", {data, id, name}, { headers: AuthHeader() })
     }
-    addInfo(data){
-        return this.api.post("/services/addInfo", {data}, { headers: AuthHeader() })
+    addInfo(data, id){
+        return this.api.post("/services/addInfo", {data, id}, { headers: AuthHeader() })
     }
     showInfo(){
         return this.api.get("/services/showInfo", { headers: AuthHeader() })

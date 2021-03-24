@@ -7,6 +7,7 @@ exports.sequelize = new Sequelize(process.env.DBNAME,process.env.DBUSERNAME,proc
 })
 
 
-// exports.information = sequelize.define('information',{
-    
-// })
+exports.information = sequelize.define('information',{
+ 
+})
+

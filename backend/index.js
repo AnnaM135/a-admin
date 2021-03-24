@@ -13,7 +13,6 @@ const AuthRouter = require("./router/AuthRouter")
 const ServicesRouter = require("./router/ServicesRouter")
 const GalleryRouter = require("./router/GalleryRouter")
 
-
 app.use(express.static(__dirname + "/public/"));
 
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -30,10 +29,10 @@ db.connect.authenticate()
 .then(() => console.log("db connected"))
 .catch((err) => console.log(err))
 
-db.connect.sync()
+//db.connect.sync()
 
 app.use("/login", AuthRouter)
 app.use("/services", ServicesRouter)
 app.use("/gallery", GalleryRouter)
 
-app.listen(8000, console.log("server running on 8000"));
+app.listen(8000, console.log("server listen on http://localhost:8000"));
