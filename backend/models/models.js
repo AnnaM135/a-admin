@@ -17,13 +17,14 @@ const ServicesHeader = require("./ServicesHeader")(db.connect, db.Sequelize)
 const ServicesInfo = require("./ServicesInfo")(db.connect, db.Sequelize)
 const Gallery = require("./Gallery")(db.connect, db.Sequelize)
 const ProjectName = require("./Project_Name")(db.connect, db.Sequelize)
+const Information = require("./Information")(db.connect, db.Sequelize)
 
 db.Admin = Admin
 db.ServicesHeader = ServicesHeader
 db.ServicesInfo = ServicesInfo
 db.Gallery = Gallery
 db.ProjectName = ProjectName
-
+db.Information = Information
 
 // Admin - Services-Header
 db.Admin.hasMany(db.ServicesHeader, {as: "servicesHeader"})

@@ -5,7 +5,7 @@ import Axios from "axios"
 class AdminService {
     constructor() {
         this.api = Axios.create({
-            baseURL: "http://localhost:8000",
+            baseURL: "http://locahost:8000",
             headers: {
                 'Content-type': 'application/json'
             },
@@ -29,6 +29,9 @@ class AdminService {
     deleteServicesInfo(id){
         return this.api.post("/services/delete", {id: id}, { headers: AuthHeader() })
     }
+    //editData(data, id){
+    //     return this.api.post("/edit", {data, id}, { headers: AuthHeader() })
+    // }
 }
 
 

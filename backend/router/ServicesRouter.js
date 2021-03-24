@@ -12,4 +12,6 @@ router.get("/showInfo", [auth.verifyToken], ServicesController.getServicesInfo)
 
 router.post("/delete", [auth.verifyToken], ServicesController.deleteServicesInfo)
 
+// router.post("/edit", [auth.verifyToken], ServicesController.editServicesDesc)
+
 module.exports = router

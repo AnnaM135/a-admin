@@ -6,6 +6,8 @@ const db = require("./models/models");
 const corsOptions = {
   origin: "http://localhost:3000",
 };
+// const { sequelize } = require('./sequelize/model');
+// sequelize.authenticate().then(res=>console.log(res)).catch(err=>console.log(err))
 
 const AuthRouter = require("./router/AuthRouter")
 const ServicesRouter = require("./router/ServicesRouter")

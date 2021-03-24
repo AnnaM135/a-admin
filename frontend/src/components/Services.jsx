@@ -44,6 +44,8 @@ class Services extends React.Component{
         }
     }
     componentDidMount(){
+        console.log(this.props.langData.langId)
+        console.log(this.state.servicesInfo)
        AdminService.getServicesDesc().then((r) =>{
            if(r.data.id){
                 this.state.servicesInfo = r.data.servicesHeader
@@ -51,6 +53,7 @@ class Services extends React.Component{
                 this.setState({})
               AdminService.showInfo().then((r) => {
                   this.state.showInfo = r.data.servicesinfo
+                  console.log(this.state.showInfo)
                   this.setState({})
               })  
            }
@@ -62,6 +65,7 @@ class Services extends React.Component{
     }
     handelChangeLang = (id) =>{
         this.props.changeData(id)
+        console.log(id)
     }
     showEditInp(){
         if(this.state.showStore === false){
@@ -86,6 +90,8 @@ class Services extends React.Component{
 
    
     editText(){
+        console.log(this.handelChangeLang)
+        console.log(this.state.description)
        AdminService.addServicesDesc(this.state.description) 
        .then(r => {
            swal("Good job!", "You checked Your Service Info!", "success")
@@ -93,7 +99,14 @@ class Services extends React.Component{
        })
        .catch((err => console.log(err)))
     }
-
+    edit(){
+        console.log(this.state.showInfo, this.props.langData.langId)
+        AdminService.editData(this.state.showInfo, this.props.langData.langId)
+        .then(r => {
+            console.log(r)
+        })
+        .catch((err) => console.log(err))
+    }
     deleteInfo(id){
         AdminService.deleteServicesInfo(id).then((r) =>{
             this.state.showInfo.filter(x => {

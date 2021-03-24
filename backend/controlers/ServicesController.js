@@ -36,3 +36,8 @@ exports.deleteServicesInfo = (req, res) =>{
     .then((data) => res.send("deleted"))
     .catch((err) => console.log(err))
 }
+
+
+// exports.editServicesDesc = (req, res) => {
+//     res.send(req.body)
+// }
