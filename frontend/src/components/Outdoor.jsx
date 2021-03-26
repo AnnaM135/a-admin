@@ -17,6 +17,8 @@ class Outdoor extends React.Component{
         super(props)
     
         this.state = {
+            photos: [],
+            info: {},
             data: {},
             inp: {
                 name_hy: "",
@@ -33,9 +35,15 @@ class Outdoor extends React.Component{
     componentDidMount(){
         AdminService.showServicesItem(this.props.match.params.id)
         .then((r) => {
-            console.log(r.data)
-          this.state.data = r.data
-           this.setState({})
+           this.state.data = r.data
+           let lang = this.state.data.name_hy || this.state.data.name_en
+            this.setState({})
+            AdminService.showServices(lang).then(r => {
+               this.state.info = r.data.data
+               const n = JSON.parse(r.data.data.photo_url)
+               this.state.photos = n
+                this.setState({})
+            })
         })
     }
     handelChangeLang = (id) =>{
@@ -56,19 +64,23 @@ class Outdoor extends React.Component{
         formData.append("title_hy", this.state.inp.title_hy)
         formData.append("name_en", this.state.inp.name_en)
         formData.append("title_en", this.state.inp.title_en)
-        formData.append("gallery_id", this.props.match.params.id)
         formData.append("lang_id", this.props.langData.langId)
         for(let i of Object.keys(this.state.inp.photo_url)){
             formData.append("photo_url", this.state.inp.photo_url[i])
         }
-       AdminService.addNewService(formData).then((r) => console.log(r.data))
+        if(this.props.langData.langId == 2){
+            formData.append("nameOfServices", this.state.data.name_en)
+            AdminService.addNewSerevice(formData).then((r) => console.log(r.data))
+            return
+        }
+        formData.append("nameOfServices", this.state.data.name_hy)
+        AdminService.addNewSerevice(formData).then((r) => console.log(r.data))
     }
     render(){
         return(
             <div class="outdoor">
                 <Header handelChangeLang = {this.handelChangeLang} langId = {this.props.langData.langId}/>
-                <h1>Add Project</h1>
-                    <div>
+                <div>
                         {
                             this.props.langData.langId == 1 ?
                             <>
@@ -90,14 +102,32 @@ class Outdoor extends React.Component{
                         <button onClick = {this.add.bind(this)}>Add</button>
                     </div>
                 <div class="outdoor-name">
-                    <h1 class="project-title-head">Outdoor advertising</h1>
-                    <h1 class="project-title-par">
-                        The company “Sdesign” operates in the sphere of outdoor advertising making (decorating the facades, making light boxes), interior design of commercial objects (installation of the advertising wall carriers: acrylic glass, foam boards, interior light boxes
-                    </h1>
+                    <h1 class="project-title-head">{this.state.data.name_hy}</h1>
+                    {
+                        this.props.langData.langId == 1 ?
+                        <>
+                             <h1 class="project-title-par">
+                                {this.state.info.title_hy}
+                            </h1>
+                            <div>
+                                {
+                                    this.state.photos.map(a => (
+                                        <div key = {a}>
+                                            <img src={a} class="services-slide" />
+                                        </div>
+                                    ))
+                                }
+                                
+                            </div>
+                        </>:
+                        <>
+                        </>
+                    }
+                   
                 </div>
                 <div class="outdoor-main">
                     <div class="outdoor-slide">
-                    <img src="/images/slide6.jpg" class="services-slide" />
+                    {/* <img src="/images/slide6.jpg" class="services-slide" /> */}
                         {/* <div class="slide">
                         <img src="/images/slide6.jpg" class="services-slide" />
 

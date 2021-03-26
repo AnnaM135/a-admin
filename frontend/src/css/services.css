@@ -34,8 +34,30 @@
 }
 
 /*  MAIN  */
-
 .services-main{
+	display: flex;
+   flex-wrap: wrap;
+   justify-content: center;
+   align-items: center;
+}
+.service-line{
+   max-width: 70%;
+	display: flex;
+   flex-wrap: wrap;
+   justify-content: center;
+   align-items: center;
+}
+.card {
+   background-color: #FFFFFF;
+}
+.s-card{
+   width: 400px;
+   height: auto;
+   padding: 20px;
+   margin: 30px;
+}
+
+/* .services-main{
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
@@ -58,7 +80,7 @@
 	width: 25%;
 	padding: 20px;
 	margin: 10px;
-}
+} */
 
 .services-main  h1{
 	font-size: 20px;

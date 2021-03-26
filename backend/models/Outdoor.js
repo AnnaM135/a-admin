@@ -1,6 +1,6 @@
 module.exports = (connect, Sequelize) => {
-    const Project = connect.define(
-        "project", 
+    const Outdoor = connect.define(
+        "outdoor", 
         {
             name_hy: {
                 type: Sequelize.STRING
@@ -17,7 +17,7 @@ module.exports = (connect, Sequelize) => {
             photo_url: {
                 type: Sequelize.STRING
             },
-            nameOfGallery: {
+            nameOfServices: {
                 type: Sequelize.STRING
             },
         },
@@ -25,6 +25,6 @@ module.exports = (connect, Sequelize) => {
             timestamps: false
         }
     )
-    // Project.sync({force:true})
-    return Project
+    // Outdoor.sync({force:true})
+    return Outdoor
 }

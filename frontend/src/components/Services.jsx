@@ -155,7 +155,7 @@ class Services extends React.Component{
                 <h1 className="title-head">{lang[this.props.langData.langId].titleOne}</h1>
                 <h1 className="title-par">{this.state.description}</h1>
             </div>
-            <div className="services-main">
+           
                 <br/><br/><br/>
                 <button>Add new Service</button>
                 <div className = "editInp">
@@ -163,12 +163,13 @@ class Services extends React.Component{
                     Title: <input className = "eInp" type="text" name="title" value = {this.state.info.title} data-id="title" onChange = {this.changeInfo.bind(this)}/>
                     <button className = "submit" onClick = {this.addServiceInfo.bind(this)}>Add</button>
                 </div>
+         <div className="services-main">
             {
                 this.props.langData.langId == 2 ? 
                 <>
                     {this.state.showInfo_en.map(a=>(
                         <div key = {a.id} className="service-line">
-                        <div className="main-one s-card">
+                        <div className="s-card card">
                             <button className = "btn-danger" onClick = {this.deleteInfo.bind(this, a.id)}><i className ="fa fa-trash-o" aria-hidden="true"></i></button>
                             
                             <h1>{a.name_en}</h1>
@@ -181,7 +182,7 @@ class Services extends React.Component{
                 <>
                 {this.state.showInfo_hy.map(a=>(
                         <div key = {a.id} className="service-line">
-                        <div className="main-one s-card">
+                        <div className="s-card card">
                             <button className = "btn-danger" onClick = {this.deleteInfo.bind(this, a.id)}><i className ="fa fa-trash-o" aria-hidden="true"></i></button>
                             
                             <h1>{a.name_hy}</h1>
@@ -213,3 +214,5 @@ const mapDispatchToProps = {
 }
 
 export default connect(mapstatetoprops, mapDispatchToProps)(Services)
+
+

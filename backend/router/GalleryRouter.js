@@ -14,4 +14,6 @@ const { auth } = require("../middlewares")
 
  router.post("/project/add", [auth.verifyToken], GalleryController.addProjectItem)
 
+ router.get("/project/get/:id", [auth.verifyToken], GalleryController.showProject)
+
 module.exports = router

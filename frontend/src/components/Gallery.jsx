@@ -32,6 +32,7 @@ class Gallery extends React.Component{
 
       componentDidMount(){
         GalleryService.getGalleryInfo().then((r) => {
+            console.log(r.data.data)
             this.state.gallery_en = r.data.data.filter(elem=> elem.name_en)
             this.state.gallery_hy = r.data.data.filter(elem=> elem.name_hy)
             this.setState({})
@@ -120,7 +121,7 @@ class Gallery extends React.Component{
                                                 <img src={a.photo_url} class="gallery-image"/>
                                                 <div class="overlay">
                                                     <button className = "btn-danger" onClick = {this.deleteProject.bind(this, a.id)}><i className ="fa fa-trash-o" aria-hidden="true"></i></button>
-                                                    <div class="text"><Link to ={ `/gallery/project/${a.id}`} class = "special-item">{a.name_hy}</Link></div>
+                                                    <div><Link to ={ `/gallery/project/${a.id}`} class = "text-gal">{a.name_hy}</Link></div>
                                                 </div>
                                             </div>
                                         )
@@ -137,7 +138,7 @@ class Gallery extends React.Component{
                                                 <img src={a.photo_url} class="gallery-image"/>
                                                 <div class="overlay">
                                                     <button className = "btn-danger" onClick = {this.deleteProject.bind(this, a.id)}><i className ="fa fa-trash-o" aria-hidden="true"></i></button>
-                                                    <div class="text"><Link to ={ `/gallery/project/${a.id}`} class = "special-item">{a.name_en}</Link></div>
+                                                    <div><Link to ={ `/gallery/project/${a.id}`} class = "text-gal">{a.name_en}</Link></div>
                                                 </div>
                                             </div>
                                         )

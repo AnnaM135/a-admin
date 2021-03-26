@@ -47,15 +47,26 @@ exports.showProjectItem = (req, res) => {
 }
 
 exports.addProjectItem = (req, res) => {
-    // const { name_hy, title_hy, name_en, title_en, gallery_id, lang_id } = req.body
+    const { nameOfGallery, name_hy, title_hy, name_en, title_en,  lang_id } = req.body
     let arr = []
-    for(let key in req.files){
-        arr = [...arr, req.files[key]]
-    }
-    // arr = arr.map(elem=>{
-    //     return generateFile(elem.name,elem.data)
-    // })
     console.log(req.files)
-    db.Project.create({...req.body,photo_urls:JSON.stringify(arr)})
+    arr = req.files.photo_url.map(elem=>{
+        console.log(elem)
+        return generateFile(elem.name,elem.data)
+    })
+    if(lang_id == 2){
+        db.Project.create({nameOfGallery, name_en, title_en, photo_url:JSON.stringify(arr)})
+        res.send({message:'ok'})
+        return 
+    }
+    db.Project.create({nameOfGallery, name_hy, title_hy ,photo_url:JSON.stringify(arr)})
     res.send({message:'ok'})
+}
+
+
+exports.showProject = async (req, res) =>{
+    const {id } = req.params
+    console.log(id)
+    const data = await db.Project.findOne({where:{nameOfGallery:id}})
+    res.send({message:'ok',data})
 }

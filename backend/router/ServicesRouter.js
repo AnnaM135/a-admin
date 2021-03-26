@@ -16,6 +16,7 @@ router.get("/outdoor/:id", [auth.verifyToken], ServicesController.showServicesIt
 
 router.post("/outdoor/add", [auth.verifyToken], ServicesController.addServicesItem)
 
+router.get("/outdoor/get/:id", [auth.verifyToken], ServicesController.showServices)
 
 
 

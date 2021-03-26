@@ -1,4 +1,6 @@
 const db = require("../models/models")
+const { generateFile } = require('../tools/tools')
+
 
 
 exports.getServicesDesc = (req, res) =>{
@@ -69,15 +71,28 @@ exports.showServicesItem = (req, res) => {
     .catch((err) => console.log(err))
 }
 
+
+
 exports.addServicesItem = (req, res) => {
+    const { nameOfServices, name_hy, title_hy, name_en, title_en,  lang_id } = req.body
     let arr = []
-    for(let key in req.files){
-        arr = [...arr, req.files[key]]
-    }
-    // arr = arr.map(elem=>{
-    //     return generateFile(elem.name,elem.data)
-    // })
     console.log(req.files)
-    db.Specialize.create({...req.body,photo_urls:JSON.stringify(arr)})
+    arr = req.files.photo_url.map(elem=>{
+        console.log(elem)
+       return generateFile(elem.name,elem.data)
+    })
+    if(lang_id == 2){
+        db.Outdoor.create({nameOfServices, name_en, title_en, photo_url:JSON.stringify(arr)})
+        res.send({message:'ok'})
+        return 
+    }
+    db.Outdoor.create({nameOfServices, name_hy, title_hy ,photo_url:JSON.stringify(arr)})
     res.send({message:'ok'})
+}
+
+exports.showServices = async (req, res) => {
+    const {id } = req.params
+    console.log(id)
+    const data = await db.Outdoor.findOne({where:{nameOfServices:id}})
+    res.send({message:'ok',data})
 }

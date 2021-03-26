@@ -32,8 +32,11 @@ class AdminService {
     showServicesItem(id){
         return this.api.get(`/services/outdoor/${id}`, { headers: AuthHeader() })
     }
-    addNewService(data){
+    addNewSerevice(data){
         return this.api.post(`/services/outdoor/add`, data, { headers: AuthHeader() })
+    }
+    showServices(id){
+        return this.api.get(`/services/outdoor/get/${id}`, { headers: AuthHeader() })
     }
 }
 

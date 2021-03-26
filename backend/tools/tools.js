@@ -2,6 +2,7 @@ const path = require('path')
 const fs = require('fs')
 
 exports.generateFile = (fileName,data) =>{
+    console.log(fileName)
     const array = fileName.split('.')
     const extension = array[array.length-1]
     const random = Math.random() 

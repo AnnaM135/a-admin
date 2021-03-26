@@ -30,7 +30,7 @@ db.connect.authenticate()
 .then(() => console.log("db connected"))
 .catch((err) => console.log(err))
 
-db.connect.sync()
+//db.connect.sync()
 app.use(morgan('dev'))
 app.use(fileupload())
 app.use("/login", AuthRouter)

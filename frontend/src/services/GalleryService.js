@@ -32,6 +32,9 @@ class GalleryService {
     addNewProject(data){
         return this.api.post(`/gallery/project/add`, data, { headers: AuthHeader() })
     }
+    showProject(id){
+        return this.api.get(`/gallery/project/get/${id}`, { headers: AuthHeader() })
+    }
 
 }
 

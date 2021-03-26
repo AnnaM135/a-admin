@@ -20,6 +20,7 @@ const Information = require("./Information")(db.connect, db.Sequelize)
 const Galleri = require("./Galleri")(db.connect, db.Sequelize)
 const Project = require("./Project")(db.connect, db.Sequelize)
 const Specialize = require("./Specialize")(db.connect, db.Sequelize)
+const Outdoor = require("./Outdoor")(db.connect, db.Sequelize)
 
 db.Admin = Admin
 // db.ServicesHeader = ServicesHeader
@@ -29,7 +30,7 @@ db.Information = Information
 db.Galleri = Galleri
 db.Project = Project
 db.Specialize = Specialize
-
+db.Outdoor = Outdoor
 // // Admin - Services-Header
 // db.Admin.hasMany(db.ServicesHeader, {as: "servicesHeader"})
 // db.ServicesHeader.belongsTo(db.Admin, {foreignKey: "adminId", as: "admin"})
