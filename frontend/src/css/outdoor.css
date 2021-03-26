@@ -1,0 +1,201 @@
+.outdoor{
+	width: 100%;
+}
+
+/* OUTDOOR MAIN */
+
+.outdoor-name{
+	width: 80%;
+	height: 160px;
+	margin-top: 60px;
+	margin-left: 100px;
+}
+
+.project-title-head{
+	color: #000000;
+	font-size: 45px;
+	font-weight: bold;
+	font-style: normal;
+	line-height: 100px;
+	margin-left: 100px;
+	margin-top: 18px;
+}
+
+.project-title-par {
+    color: #000000;
+    font-size: 18px;
+    font-weight: 400;
+    margin-left: 100px;
+    margin-top: -46px;
+}
+
+.outdoor-slide{
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background-color: #C4C4C4;
+	max-width: 60%;
+	margin-left: 20%;
+}
+
+.services-slide{
+	width: 100%;
+	height: 100vh;
+	position: relative;
+	z-index: 2;
+}
+
+
+.slide{
+	padding: 180px;
+}
+
+.slide img{
+	border-radius: 5px;
+}
+.slide-radio{
+	background-color: yellowgreen;
+	display: inline-block;
+	/* justify-content: space-around;
+	align-items: center; */
+	margin-top: 50px;
+}
+input[type="radio"] + label {
+	display: inline-block;
+	text-align: right;
+	padding: 0;
+	margin: 0 10px 0 0;
+  }
+  input[type="radio"] {
+	visibility: hidden;
+  }
+  input[type="radio"] + label:after {
+	display: inline-block;
+	content: "";
+	width: 20px;
+	height: 20px;
+	border: 1px solid grey;
+	margin-left: 10px;
+	cursor: pointer;
+	border-radius: 4px;
+	background: url('http://www.dis-ag.com/SiteCollectionDocuments/images/checkbox-sprite.png');
+	background-size: 100%;
+  }
+  
+  input[type="radio"]:checked + label:after {
+	background-position: 0 -21px;
+  }
+/*
+input[type="radio"]{
+    background-color: #f66;
+  color: red; 
+}*/
+
+.outdoor-main-two{
+	width: 80%;
+	height: 160px;
+	margin-top: 60px;
+	margin-left: 100px;
+	margin-bottom: 60px;
+}
+.outdoor-title-head{
+	font-weight: bold;
+    font-size: 20px;
+    line-height: 191.62%;
+    font-weight: 700;
+    text-decoration: none;
+    color: #000000;
+    margin-left: 100px;
+
+}
+
+
+@media (max-width: 800px) {
+
+	.outdoor-name{
+		width: 80%;
+    	height: 160px;
+    	margin-top: 60px;
+	}
+ 
+	.project-title-head{
+		font-size: 40px;
+		margin-left: 0;
+	}
+
+	.project-title-par {
+	    font-size: 13px;
+	    margin-left: 0;
+	}
+
+	.outdoor-slide{
+		background-color: #C4C4C4;
+		max-width: 100%;
+		margin: 0;
+	}
+
+	.slide{
+		padding: 100px;
+	}
+
+	.slide img{
+		border-radius: 5px;
+	}
+	.outdoor-main-two{
+		margin: 0;
+	}
+	.slide-radio{
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		margin-top: 50px;
+	}
+	.icon-area{
+		text-align: flex-start;
+		margin-left: 40px;
+	}
+	.hr{
+		display: none;
+	}
+}
+
+@media (max-width: 500px) {
+
+   .outdoor-name{
+   		margin: 60px 0;
+  }
+  .project-title-head{
+    font-size: 30px;
+    margin-left: 25px;
+  }
+  .project-title-par {
+      font-size: 12px;
+      margin-top: -35px;
+      margin-left: 25px;
+  }
+  .outdoor-main{
+  	max-width: 100%;
+  	background-color: red;
+  }
+   .outdoor-slide{
+		background-color: #C4C4C4;
+		max-width: 100%;
+		margin: 0;
+	}
+
+	.slide{
+		padding: 100px;
+	}
+  .s-icon{
+    font-size: 18px;
+  }
+  .s-par{
+    margin-left: 20px;
+    font-size: 11px;
+  }
+  .rights {
+      margin: 14px 17px 47px 0;
+  }
+}

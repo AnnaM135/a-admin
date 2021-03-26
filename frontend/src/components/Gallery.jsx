@@ -21,17 +21,21 @@ class Gallery extends React.Component{
     
         this.state = {
           inp: {
-            project_name: "",
+            name_hy: "",
+            name_en: "",
             photo_url: "",
           },
-          gallery: []
+          gallery_hy: [],
+          gallery_en: []
         };
       }
 
       componentDidMount(){
         GalleryService.getGalleryInfo().then((r) => {
-            this.state.gallery = r.data.gallery
+            this.state.gallery_en = r.data.data.filter(elem=> elem.name_en)
+            this.state.gallery_hy = r.data.data.filter(elem=> elem.name_hy)
             this.setState({})
+            console.log(this.state.gallery_en, this.state.gallery_hy)
         })
       }
 
@@ -49,9 +53,16 @@ class Gallery extends React.Component{
         this.setState({});
     }
     deleteProject(id){
-        GalleryService.deleteGalleryInfo(id).then((r) =>{
-            this.state.gallery.filter(x => {
-                if(x.id == id){
+        GalleryService.delete(id).then((r) =>{
+            console.log(r.data)
+            this.state.gallery_en.filter(elem=> {
+                if(elem.id == id){
+                    id = r.data
+                }
+                this.componentDidMount()
+            })
+            this.state.gallery_hy.filter(elem=> {
+                if(elem.id == id){
                     id = r.data
                 }
                 this.componentDidMount()
@@ -60,15 +71,18 @@ class Gallery extends React.Component{
         })
     }
     add(){
-        console.log(this.state.inp)
-        let formData = new FormData()
-        formData.append("project_name", this.state.inp.project_name)
+        const formData = new FormData()
+        formData.append("name_hy", this.state.inp.name_hy)
+        formData.append("name_en", this.state.inp.name_en)
+        formData.append("id", this.props.langData.langId)
         formData.append("photo_url", this.state.inp.photo_url[0])
         GalleryService.addProject(formData).then((r) => {
             swal("Good job!", "You clicked the button!", "success")
-               this.state.inp.project_name = "";
-               this.state.inp.photo_url =  "";
-            this.setState({})
+            this.componentDidMount()
+               this.state.inp.name_hy = "";
+               this.state.inp.name_en =  "";
+               this.state.inp.photo_url = "";
+             this.setState({})
         })
         .catch((err) => console.log(err))
     }
@@ -79,25 +93,59 @@ class Gallery extends React.Component{
                 <Header handelChangeLang = {this.handelChangeLang} langId = {this.props.langData.langId}/>
                     <h1>Add Project</h1>
                     <div>
-                    Project Name:
-                    <input type="text" data-id="project_name" value={this.state.inp.project_name} onChange={this.change.bind(this)} />
+                   {
+                       this.props.langData.langId == 1 ?
+                       <>
+                            Project Name_hy:
+                            <input type="text" data-id="name_hy" value={this.state.inp.name_hy} onChange={this.change.bind(this)} />
+                       </>:
+                       <>
+                            Project Name_eng:
+                            <input type="text" data-id="name_en" value={this.state.inp.name_en} onChange={this.change.bind(this)} />
+                       </>
+                   }
+                    
                     Photo: <input type="file" data-id = "photo_url" onChange={this.change.bind(this)}/>
                     <button onClick = {this.add.bind(this)}>Add</button>
                     </div>
-                <div class="gallery-main">
+                    
                     {
-                        this.state.gallery.map((a) => (
-                            <div class="column">
-                                <img src={`http://localhost:8000/images/${a.photo_url}`}  class="gallery-image"/>
-                                <div class="overlay">
-                                <button className = "btn-danger" onClick = {this.deleteProject.bind(this, a.id)}><i className ="fa fa-trash-o" aria-hidden="true"></i></button>
-                                    <div class="text"><Link to ={ `/gallery/project/${a.id}`} class = "special-item">{a.project_name}{lang[this.props.langData.langId].titleOne}</Link></div>
-                                </div>
+                        this.props.langData.langId == 1 ?
+                        <>
+                            <div class="gallery-main"> 
+                                {
+                                    this.state.gallery_hy.map(a => {
+                                        return (
+                                            <div class="column">
+                                                <img src={a.photo_url} class="gallery-image"/>
+                                                <div class="overlay">
+                                                    <button className = "btn-danger" onClick = {this.deleteProject.bind(this, a.id)}><i className ="fa fa-trash-o" aria-hidden="true"></i></button>
+                                                    <div class="text"><Link to ={ `/gallery/project/${a.id}`} class = "special-item">{a.name_hy}</Link></div>
+                                                </div>
+                                            </div>
+                                        )
+                                    })
+                                }
                             </div>
-                        ))
-                    }
-                   
-                </div>
+                        </>:
+                        <>
+                            <div class="gallery-main"> 
+                                {
+                                    this.state.gallery_en.map(a => {
+                                        return (
+                                            <div class="column">
+                                                <img src={a.photo_url} class="gallery-image"/>
+                                                <div class="overlay">
+                                                    <button className = "btn-danger" onClick = {this.deleteProject.bind(this, a.id)}><i className ="fa fa-trash-o" aria-hidden="true"></i></button>
+                                                    <div class="text"><Link to ={ `/gallery/project/${a.id}`} class = "special-item">{a.name_en}</Link></div>
+                                                </div>
+                                            </div>
+                                        )
+                                    })
+                                }
+                            </div>
+                        </>
+                    }          
                 <Footer />
 	        </div>
         )

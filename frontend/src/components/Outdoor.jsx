@@ -1,16 +1,18 @@
 import React from "react";
+import "../App.css"
 import Header from "./Header";
 import "../css/header.css"
 import Footer from "./Footer";
 import "../css/footer.css"
-import "../App.css"
-import "../css/projectName.css"
+import "../css/outdoor.css"
 import { lang } from "../lang"
-import {connect} from "react-redux"
 import {changeData} from "../store/languages/action"
-import GalleryService from "../services/GalleryService";
+import {connect} from "react-redux"
+import AdminService from "../services/AdminService";
 
-class ProjectName extends React.Component{
+
+
+class Outdoor extends React.Component{
     constructor(props) {
         super(props)
     
@@ -23,14 +25,17 @@ class ProjectName extends React.Component{
                 title_en: "",
                 photo_url: "",
               },
+              images: ['slide6.jpg', 'slide2.jpg', 'slide5.jpg', 'slide4.jfif'],
+			
+			index: 0
         }
     }
     componentDidMount(){
-        GalleryService.showProjectItem(this.props.match.params.id)
+        AdminService.showServicesItem(this.props.match.params.id)
         .then((r) => {
-            console.log(r)
-           this.state.data = r.data
-            this.setState({})
+            console.log(r.data)
+          this.state.data = r.data
+           this.setState({})
         })
     }
     handelChangeLang = (id) =>{
@@ -56,12 +61,11 @@ class ProjectName extends React.Component{
         for(let i of Object.keys(this.state.inp.photo_url)){
             formData.append("photo_url", this.state.inp.photo_url[i])
         }
-       GalleryService.addNewProject(formData).then((r) => console.log(r.data))
+       AdminService.addNewService(formData).then((r) => console.log(r.data))
     }
-
     render(){
         return(
-            <div className="project">
+            <div class="outdoor">
                 <Header handelChangeLang = {this.handelChangeLang} langId = {this.props.langData.langId}/>
                 <h1>Add Project</h1>
                     <div>
@@ -85,35 +89,40 @@ class ProjectName extends React.Component{
                         Photos: <input type="file" multiple data-id = "photo_url" onChange={this.change.bind(this)}/>
                         <button onClick = {this.add.bind(this)}>Add</button>
                     </div>
-                <div className="project-name">
-                
-                    <h1 className="project-title-head">{this.state.data.name_hy}</h1> 
-                    {/* <h1 className="project-title-par">
+                <div class="outdoor-name">
+                    <h1 class="project-title-head">Outdoor advertising</h1>
+                    <h1 class="project-title-par">
                         The company “Sdesign” operates in the sphere of outdoor advertising making (decorating the facades, making light boxes), interior design of commercial objects (installation of the advertising wall carriers: acrylic glass, foam boards, interior light boxes
-                    </h1> */}
+                    </h1>
                 </div>
-                {/* <div className="project-main">
-                    <div className="column-big">
-                        <div className="big-area">
-                            <img src="/images/upload.png" />
-                        </div>
+                <div class="outdoor-main">
+                    <div class="outdoor-slide">
+                    <img src="/images/slide6.jpg" class="services-slide" />
+                        {/* <div class="slide">
+                        <img src="/images/slide6.jpg" class="services-slide" />
+
+                        </div> */}
                     </div>
-                    <div className="column-small">
-                        <div className="small-area">
-                            <img src="/images/upload.png" />
-                        </div>
-                    </div>
-                    <div className="column-small">
-                        <div className="small-area">
-                            <img src="/images/upload.png" />
-                        </div>
-                    </div>
-                    <div className="column-big">
-                        <div className="big-area">
-                            <img src="/images/upload.png" />
-                        </div>
-                    </div>
-                </div> */}
+                    {/* <div class="slide-radio">
+                        <input type="radio" />
+                        <input type="radio" />
+                        <input type="radio" />
+                        <input type="radio" />
+                    </div> */}
+                        {/* <label class="custom-radio-btn">
+  <input type="radio" name="sample" checked>
+  <span class="checkmark"></span>
+</label>
+<label class="custom-radio-btn">
+  <input type="radio" name="sample">
+  <span class="checkmark"></span>
+</label> */}
+                </div>
+                <div class="outdoor-main-two">
+                    <h1 class="outdoor-title-head">Digital Printing</h1>
+                    <h1 class="outdoor-title-head">Large Format printing</h1>
+                    <h1 class="outdoor-title-head">CNC Engraveing</h1>
+                </div>
                 <Footer />
 	        </div>
         )
@@ -130,4 +139,4 @@ const mapDispatchToProps = {
 }
 
 
-export default connect(mapstatetoprops, mapDispatchToProps) (ProjectName)
+export default connect(mapstatetoprops, mapDispatchToProps)(Outdoor)

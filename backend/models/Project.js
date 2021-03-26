@@ -1,6 +1,6 @@
 module.exports = (connect, Sequelize) => {
-    const Project_Name = connect.define(
-        "project_name", 
+    const Project = connect.define(
+        "project", 
         {
             name_hy: {
                 type: Sequelize.STRING
@@ -22,5 +22,5 @@ module.exports = (connect, Sequelize) => {
             timestamps: false
         }
     )
-    return Project_Name
+    return Project
 }

@@ -13,16 +13,15 @@ class GalleryService {
 
     }
 
-    addProject(data){
-        return this.api.post("/gallery/add", data,  { headers: AuthHeader() })
-    }
-
     getGalleryInfo(){
         return this.api.get("/gallery", { headers: AuthHeader() })
     }
 
-   
-    deleteGalleryInfo(id){
+    addProject(data){
+        return this.api.post("/gallery/add", data,  { headers: AuthHeader() })
+    }
+
+    delete(id){
         return this.api.post("/gallery/delete", {id: id}, { headers: AuthHeader() })
     }
 
@@ -30,9 +29,9 @@ class GalleryService {
         return this.api.get(`/gallery/project/${id}`, { headers: AuthHeader() })
     }
 
-    // addNewProject(data){
-    //     return this.api.post(`/gallery/project/${id}`, data, { headers: AuthHeader() })
-    // }
+    addNewProject(data){
+        return this.api.post(`/gallery/project/add`, data, { headers: AuthHeader() })
+    }
 
 }
 

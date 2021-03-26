@@ -6,9 +6,10 @@ const db = require("./models/models");
 const corsOptions = {
   origin: "http://localhost:3000",
 };
+const fileupload = require('express-fileupload')
 // const { sequelize } = require('./sequelize/model');
 // sequelize.authenticate().then(res=>console.log(res)).catch(err=>console.log(err))
-
+const morgan = require('morgan')
 const AuthRouter = require("./router/AuthRouter")
 const ServicesRouter = require("./router/ServicesRouter")
 const GalleryRouter = require("./router/GalleryRouter")
@@ -29,8 +30,9 @@ db.connect.authenticate()
 .then(() => console.log("db connected"))
 .catch((err) => console.log(err))
 
-//db.connect.sync()
-
+db.connect.sync()
+app.use(morgan('dev'))
+app.use(fileupload())
 app.use("/login", AuthRouter)
 app.use("/services", ServicesRouter)
 app.use("/gallery", GalleryRouter)

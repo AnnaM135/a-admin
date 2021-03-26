@@ -15,9 +15,6 @@ class AdminService {
     getServicesDesc() {
         return this.api.get("/services", { headers: AuthHeader() })
     }
-    // getLangInfo(name,id){
-    //     return this.api.get("/services/getLangInfo", {name, id},  { headers: AuthHeader() })
-    // }
     addServicesDesc(data, id, name) {
         console.log({ headers: AuthHeader() })
         return this.api.post("/services/add", {data, id, name}, { headers: AuthHeader() })
@@ -32,9 +29,12 @@ class AdminService {
     deleteServicesInfo(id){
         return this.api.post("/services/delete", {id: id}, { headers: AuthHeader() })
     }
-    //editData(data, id){
-    //     return this.api.post("/edit", {data, id}, { headers: AuthHeader() })
-    // }
+    showServicesItem(id){
+        return this.api.get(`/services/outdoor/${id}`, { headers: AuthHeader() })
+    }
+    addNewService(data){
+        return this.api.post(`/services/outdoor/add`, data, { headers: AuthHeader() })
+    }
 }
 
 

@@ -46,49 +46,28 @@ class Services extends React.Component{
     }
     componentDidMount(){
        AdminService.getServicesDesc().then(r =>{
-        console.log(r.data)
         const arr = r.data
         arr.forEach(elem=>{
             if(elem.name === 'description'){
                 if(this.props.langData.langId == 1){
                     this.state.description = elem.info_hy           
                    this.setState({})
-                   return
-                   
+                   return                 
                 }
                 this.state.description = elem.info_en
-                this.setState({})
-                
+                this.setState({})               
             }
-        })
-        //    if(r.data.id){
-               
-        //         // this.state.servicesInfo = r.data.servicesHeader
-        //         // this.state.description = this.state.servicesInfo[0].description
-        //         // this.setState({})
-        //         // AdminService.showInfo().then((r) => {
-        //         //   this.state.showInfo = r.data.servicesinfo
-        //         //   console.log(this.state.showInfo)
-        //         //   this.setState({})
-        //         // })  
-        //         // AdminService.getLangInfo('description',this.props.langData.langId).then(r => {
-        //         //   console.log(r.data)
-        //         // })
-        //    }
-        //    else{
-        //        this.props.history.push("/login", "Please login")
-        //    }
-                 
+        })               
        })
        AdminService.showInfo().then((r) => {
         let english = []
         let armenian = []
         r.data.forEach(elem=> {
             if(elem.name_hy){
-                armenian = [...armenian,{name_hy:elem.name_hy,title_hy:elem.title_hy}]
+                armenian = [...armenian,{id: elem.id,name_hy:elem.name_hy,title_hy:elem.title_hy}]
                 return
             }
-            english = [...english,{name_en:elem.name_en, title_en:elem.title_en}]
+            english = [...english,{id: elem.id,name_en:elem.name_en, title_en:elem.title_en}]
         })
         this.state.showInfo_en = english
         this.state.showInfo_hy = armenian
@@ -126,23 +105,21 @@ class Services extends React.Component{
     editText(){
        AdminService.addServicesDesc(this.state.description, this.props.langData.langId, "description") 
        .then(r => {
-           console.log(r)
-        //    swal("Good job!", "You checked Your Service Info!", "success")
-        //    window.location.reload()
+           swal("Good job!", "You checked Your Service Info!", "success")
+           window.location.reload()
        })
        .catch((err => console.log(err)))
     }
-    // edit(){
-    //     console.log(this.state.showInfo, this.props.langData.langId)
-    //     AdminService.editData(this.state.showInfo, this.props.langData.langId)
-    //     .then(r => {
-    //         console.log(r)
-    //     })
-    //     .catch((err) => console.log(err))
-    // }
+    
     deleteInfo(id){
         AdminService.deleteServicesInfo(id).then((r) =>{
-            this.state.showInfo.filter(x => {
+            this.state.showInfo_hy.filter(x => {
+                if(x.id == id){
+                    id = r.data
+                }
+                this.componentDidMount()
+            })
+            this.state.showInfo_en.filter(x => {
                 if(x.id == id){
                     id = r.data
                 }
@@ -157,15 +134,12 @@ class Services extends React.Component{
     addServiceInfo(){
         AdminService.addInfo(this.state.info, this.props.langData.langId)
         .then((r) => {
-            //console.log(r.data)
-                // this.state.info = r.data
-                // this.state.info.name = r.data.name
-                // this.state.info.title = r.data.title
-                // swal("Good job!", "You clicked the button!", "success")
-                // this.state.inp.name = ""
-                // this.state.inp.title = ""
-                // this.componentDidMount()
-                // this.setState({})
+            console.log(r.data)
+                swal("Good job!", "You clicked the button!", "success")
+                this.state.info.name = ""
+                this.state.info.title = ""
+                this.componentDidMount()
+                this.setState({})
             })
             .catch((err) => console.log(err))
     }
@@ -180,7 +154,6 @@ class Services extends React.Component{
                 <button style={{display:  this.state.showStore === true ? 'flex' : 'none' }} onClick = {this.editText.bind(this)}>Edit</button>
                 <h1 className="title-head">{lang[this.props.langData.langId].titleOne}</h1>
                 <h1 className="title-par">{this.state.description}</h1>
-                {/* <h1 className="title-par">{lang[this.props.langData.langId].paragraph}</h1> */}
             </div>
             <div className="services-main">
                 <br/><br/><br/>
@@ -200,8 +173,7 @@ class Services extends React.Component{
                             
                             <h1>{a.name_en}</h1>
                             <h1>{a.title_en}</h1>
-                            
-                            <button className="btn-services"><Link to = "/services/outdoor" className = "special-item">LEARN MORE</Link></button>
+                            <button className="btn-services"><Link to ={ `/services/outdoor/${a.id}`} className = "special-item">LEARN MORE</Link></button>
                         </div>
                     </div>
                     ))}
@@ -215,13 +187,12 @@ class Services extends React.Component{
                             <h1>{a.name_hy}</h1>
                             <h1>{a.title_hy}</h1>
                             
-                            <button className="btn-services"><Link to = "/services/outdoor" className = "special-item">LEARN MORE</Link></button>
+                            <button className="btn-services"><Link to ={ `/services/outdoor/${a.id}`} className = "special-item">LEARN MORE</Link></button>
                         </div>
                     </div>
                     ))}
                 </>
             }
-
             </div>
             <Footer />
         </div>

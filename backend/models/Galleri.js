@@ -1,8 +1,11 @@
 module.exports = (connect, Sequelize) => {
-    const Gallery = connect.define(
-        "gallery", 
+    const Galleri = connect.define(
+        "galleri", 
         {
-            project_name: {
+            name_hy: {
+                type: Sequelize.STRING
+            },
+            name_en: {
                 type: Sequelize.STRING
             },
             photo_url: {
@@ -13,5 +16,5 @@ module.exports = (connect, Sequelize) => {
             timestamps: false
         }
     )
-    return Gallery
+    return Galleri
 }

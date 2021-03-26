@@ -59,14 +59,25 @@ exports.editInfo =  async (req, res) =>{
     res.send({message:'ok'})   
 }
 
-// exports.getData = async (req,res) =>{
-// console.log(req.body)
-//     // const { name, id } = req.body
-//     // const response = await db.Information.findOne({where:{name}})
-//     // if(id === 2){
-//     //     res.send({data:response.info_en})
-//     //     return
-//     // }
-//     // res.send({data:response.info_hy})
-// }
 
+exports.showServicesItem = (req, res) => {
+    console.log(req.params.id)
+    db.ServicesInfo.findByPk(req.params.id)
+    .then((data) => {
+        res.send(data)
+    })
+    .catch((err) => console.log(err))
+}
+
+exports.addServicesItem = (req, res) => {
+    let arr = []
+    for(let key in req.files){
+        arr = [...arr, req.files[key]]
+    }
+    // arr = arr.map(elem=>{
+    //     return generateFile(elem.name,elem.data)
+    // })
+    console.log(req.files)
+    db.Specialize.create({...req.body,photo_urls:JSON.stringify(arr)})
+    res.send({message:'ok'})
+}
