@@ -23,7 +23,6 @@ class Login extends Component {
                   this.state.errors[item.param] = item.msg
                 })
                 this.setState({})
-                console.log(this.state.errors)
               }
               else{
                 this.state.errors = {}

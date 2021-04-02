@@ -39,10 +39,13 @@ class Outdoor extends React.Component{
            let lang = this.state.data.name_hy || this.state.data.name_en
             this.setState({})
             AdminService.showServices(lang).then(r => {
-               this.state.info = r.data.data
-               const n = JSON.parse(r.data.data.photo_url)
-               this.state.photos = n
-                this.setState({})
+                if(!r.data.data){
+                    return "Admin did not add any information"
+                }
+                this.state.info = r.data.data
+                const n = JSON.parse(r.data.data.photo_url)
+                this.state.photos = n
+                this.setState({})            
             })
         })
     }
@@ -78,10 +81,10 @@ class Outdoor extends React.Component{
     }
     render(){
         return(
-            <div class="outdoor">
+            <div className="outdoor">
                 <Header handelChangeLang = {this.handelChangeLang} langId = {this.props.langData.langId}/>
                 <div>
-                        {
+                        {                       
                             this.props.langData.langId == 1 ?
                             <>
                                 Project Name_hy:
@@ -101,19 +104,19 @@ class Outdoor extends React.Component{
                         Photos: <input type="file" multiple data-id = "photo_url" onChange={this.change.bind(this)}/>
                         <button onClick = {this.add.bind(this)}>Add</button>
                     </div>
-                <div class="outdoor-name">
-                    <h1 class="project-title-head">{this.state.data.name_hy}</h1>
+                <div className="outdoor-name">
+                    <h1 className="project-title-head">{this.state.data.name_hy}</h1>
                     {
                         this.props.langData.langId == 1 ?
                         <>
-                             <h1 class="project-title-par">
+                             <h1 className="project-title-par">
                                 {this.state.info.title_hy}
                             </h1>
                             <div>
                                 {
                                     this.state.photos.map(a => (
                                         <div key = {a}>
-                                            <img src={a} class="services-slide" />
+                                            <img src={a} className="services-slide" />
                                         </div>
                                     ))
                                 }
@@ -125,8 +128,8 @@ class Outdoor extends React.Component{
                     }
                    
                 </div>
-                <div class="outdoor-main">
-                    <div class="outdoor-slide">
+                <div className="outdoor-main">
+                    <div className="outdoor-slide">
                     {/* <img src="/images/slide6.jpg" class="services-slide" /> */}
                         {/* <div class="slide">
                         <img src="/images/slide6.jpg" class="services-slide" />
@@ -148,10 +151,10 @@ class Outdoor extends React.Component{
   <span class="checkmark"></span>
 </label> */}
                 </div>
-                <div class="outdoor-main-two">
-                    <h1 class="outdoor-title-head">Digital Printing</h1>
-                    <h1 class="outdoor-title-head">Large Format printing</h1>
-                    <h1 class="outdoor-title-head">CNC Engraveing</h1>
+                <div className="outdoor-main-two">
+                    <h1 className="outdoor-title-head">Digital Printing</h1>
+                    <h1 className="outdoor-title-head">Large Format printing</h1>
+                    <h1 className="outdoor-title-head">CNC Engraveing</h1>
                 </div>
                 <Footer />
 	        </div>

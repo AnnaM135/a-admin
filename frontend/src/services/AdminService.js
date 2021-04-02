@@ -15,6 +15,9 @@ class AdminService {
     getServicesDesc() {
         return this.api.get("/services", { headers: AuthHeader() })
     }
+    // logout(){
+    //     return this.api.get("/home", {headers: AuthHeader()})
+    // }
     addServicesDesc(data, id, name) {
         console.log({ headers: AuthHeader() })
         return this.api.post("/services/add", {data, id, name}, { headers: AuthHeader() })

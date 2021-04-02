@@ -3,18 +3,26 @@ import {connect} from 'react-redux'
 import changeUserData from "../store/profile/action"
 import { Link} from "react-router-dom";
 import "../App.css"
+import AdminService from "../services/AdminService"
 
 
 class Home extends Component {
-    // componentDidMount(){
-    //     // console.log(this.props.data)
-    //     if(Object.keys(this.props.data.user).length == 0){
-    //         this.props.history.push('/login')
-    //     }
-    // }
+    //componentDidMount(){
+     //   console.log(Object.keys(this.props.data.user))
+//    if(Object.keys(this.props.data.user).length == 0){
+//             this.props.history.push('/login')
+//         }
+    //}
     out(){
+        // AdminService.logout().then(r =>{
+        //     localStorage.clear()
+        //     this.props.changeUserData('logout')
+        // this.props.history.push('/login')
+        // })
+        //localStorage.clear()
         this.props.changeUserData('logout')
-        this.props.history.push('/login')
+    this.props.history.push('/login')
+        
     }
     render() {
         return (

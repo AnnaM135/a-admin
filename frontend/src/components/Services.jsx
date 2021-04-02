@@ -23,7 +23,8 @@ class Services extends React.Component{
             servicesInfo: [],
             showStore: false,
             description: "",
-           
+            description_hy: "",
+            description_en: "",
                 name: "",
                 title: "",
             
@@ -50,11 +51,13 @@ class Services extends React.Component{
         arr.forEach(elem=>{
             if(elem.name === 'description'){
                 if(this.props.langData.langId == 1){
-                    this.state.description = elem.info_hy           
+                    this.state.description = elem.info_hy 
+                    this.state.description_hy = elem.info_hy          
                    this.setState({})
                    return                 
                 }
                 this.state.description = elem.info_en
+                this.state.description_en = elem.info_en
                 this.setState({})               
             }
         })               
@@ -134,7 +137,6 @@ class Services extends React.Component{
     addServiceInfo(){
         AdminService.addInfo(this.state.info, this.props.langData.langId)
         .then((r) => {
-            console.log(r.data)
                 swal("Good job!", "You clicked the button!", "success")
                 this.state.info.name = ""
                 this.state.info.title = ""
@@ -149,11 +151,20 @@ class Services extends React.Component{
             <div className="services">
                 <Header handelChangeLang = {this.handelChangeLang} langId = {this.props.langData.langId}/>
             <div className="services-title">    
-                <button onClick = {this.showEditInp.bind(this)}><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit Services Info</button>      
+                <button onClick = {this.showEditInp.bind(this)}><i className="fa fa-pencil-square-o" aria-hidden="true"></i>Edit Services Info</button>      
                 <input data-id = 'description' style={{display:  this.state.showStore === true ? 'flex' : 'none' }} onChange= {this.change.bind(this)} value = {this.state.description} type="text" name="description" placeholder="Enter your text" />
                 <button style={{display:  this.state.showStore === true ? 'flex' : 'none' }} onClick = {this.editText.bind(this)}>Edit</button>
                 <h1 className="title-head">{lang[this.props.langData.langId].titleOne}</h1>
-                <h1 className="title-par">{this.state.description}</h1>
+                {
+                    this.props.langData.langId == 1 ?
+                    <>
+                        <h1 className="title-par">{this.state.description_hy}</h1>
+
+                    </>:
+                    <>
+                        <h1 className="title-par">{this.state.description_en}</h1>
+                    </>
+                }
             </div>
            
                 <br/><br/><br/>

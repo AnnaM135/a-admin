@@ -9,6 +9,8 @@ import { lang } from "../lang"
 import {connect} from "react-redux"
 import {changeData} from "../store/languages/action"
 import GalleryService from "../services/GalleryService";
+import swal from 'sweetalert';
+
 
 class ProjectName extends React.Component{
     constructor(props) {
@@ -36,9 +38,12 @@ class ProjectName extends React.Component{
            let lang = this.state.data.name_hy || this.state.data.name_en
             this.setState({})
             GalleryService.showProject(lang).then(r => {
+                if(!r.data.data){
+                    return "Admin did not add any information"
+                }
                 this.state.info = r.data.data
-               const n = JSON.parse(r.data.data.photo_url)
-               this.state.photos = n
+                const n = JSON.parse(r.data.data.photo_url)
+                this.state.photos = n
                 this.setState({})
             })
         })
@@ -68,11 +73,19 @@ class ProjectName extends React.Component{
         }
         if(this.props.langData.langId == 2){
             formData.append("nameOfGallery", this.state.data.name_en)
-            GalleryService.addNewProject(formData).then((r) => console.log(r.data))
+            GalleryService.addNewProject(formData).then((r) => {
+                console.log(r.data)
+                this.componentDidMount()
+                this.setState({})
+            })
             return
         }
         formData.append("nameOfGallery", this.state.data.name_hy)
-        GalleryService.addNewProject(formData).then((r) => console.log(r.data))
+        GalleryService.addNewProject(formData).then((r) => {
+            console.log(r.data)
+            this.componentDidMount()
+            this.setState({})
+        })
     }
     
     render(){

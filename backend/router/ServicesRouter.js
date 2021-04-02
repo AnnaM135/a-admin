@@ -1,23 +1,21 @@
 const router = require("express").Router()
 const ServicesController = require("../controlers/ServicesController")
-const { auth } = require("../middlewares")
+//const { auth } = require("../middlewares")
 
-router.get("/", [auth.verifyToken], ServicesController.getServicesDesc)
+router.get("/", ServicesController.getServicesDesc)
 
-router.post("/add", [auth.verifyToken], ServicesController.editInfo)
+router.post("/add", ServicesController.editInfo)
 
-router.post("/addInfo", [auth.verifyToken], ServicesController.addInfo)
+router.post("/addInfo", ServicesController.addInfo)
 
-router.get("/showInfo", [auth.verifyToken], ServicesController.getServicesInfo)
+router.get("/showInfo", ServicesController.getServicesInfo)
 
-router.post("/delete", [auth.verifyToken], ServicesController.deleteServicesInfo)
+router.post("/delete",  ServicesController.deleteServicesInfo)
 
-router.get("/outdoor/:id", [auth.verifyToken], ServicesController.showServicesItem)
+router.get("/outdoor/:id", ServicesController.showServicesItem)
 
-router.post("/outdoor/add", [auth.verifyToken], ServicesController.addServicesItem)
+router.post("/outdoor/add",  ServicesController.addServicesItem)
 
-router.get("/outdoor/get/:id", [auth.verifyToken], ServicesController.showServices)
-
-
+router.get("/outdoor/get/:id",  ServicesController.showServices)
 
 module.exports = router

@@ -1,19 +1,19 @@
 const router = require("express").Router()
 const GalleryController = require("../controlers/GalleryControllers")
-const { auth } = require("../middlewares")
+//const { auth } = require("../middlewares")
 
 
 
- router.get("/", [auth.verifyToken], GalleryController.getGalleryInfo)
+ router.get("/",  GalleryController.getGalleryInfo)
 
- router.post("/add", [auth.verifyToken], GalleryController.addProjectName)
+ router.post("/add",  GalleryController.addProjectName)
 
- router.post("/delete", [auth.verifyToken], GalleryController.deleteGalleryInfo)
+ router.post("/delete",  GalleryController.deleteGalleryInfo)
 
- router.get("/project/:id", [auth.verifyToken], GalleryController.showProjectItem)
+ router.get("/project/:id",  GalleryController.showProjectItem)
 
- router.post("/project/add", [auth.verifyToken], GalleryController.addProjectItem)
+ router.post("/project/add",  GalleryController.addProjectItem)
 
- router.get("/project/get/:id", [auth.verifyToken], GalleryController.showProject)
+ router.get("/project/get/:id",  GalleryController.showProject)
 
 module.exports = router

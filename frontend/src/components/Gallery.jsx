@@ -32,11 +32,9 @@ class Gallery extends React.Component{
 
       componentDidMount(){
         GalleryService.getGalleryInfo().then((r) => {
-            console.log(r.data.data)
             this.state.gallery_en = r.data.data.filter(elem=> elem.name_en)
             this.state.gallery_hy = r.data.data.filter(elem=> elem.name_hy)
             this.setState({})
-            console.log(this.state.gallery_en, this.state.gallery_hy)
         })
       }
 
@@ -55,7 +53,6 @@ class Gallery extends React.Component{
     }
     deleteProject(id){
         GalleryService.delete(id).then((r) =>{
-            console.log(r.data)
             this.state.gallery_en.filter(elem=> {
                 if(elem.id == id){
                     id = r.data
@@ -80,6 +77,7 @@ class Gallery extends React.Component{
         GalleryService.addProject(formData).then((r) => {
             swal("Good job!", "You clicked the button!", "success")
             this.componentDidMount()
+
                this.state.inp.name_hy = "";
                this.state.inp.name_en =  "";
                this.state.inp.photo_url = "";
@@ -90,7 +88,7 @@ class Gallery extends React.Component{
     render(){
       
         return(
-            <div class="gallery">
+            <div className="gallery">
                 <Header handelChangeLang = {this.handelChangeLang} langId = {this.props.langData.langId}/>
                     <h1>Add Project</h1>
                     <div>
@@ -113,15 +111,15 @@ class Gallery extends React.Component{
                     {
                         this.props.langData.langId == 1 ?
                         <>
-                            <div class="gallery-main"> 
+                            <div className="gallery-main"> 
                                 {
                                     this.state.gallery_hy.map(a => {
                                         return (
-                                            <div class="column">
-                                                <img src={a.photo_url} class="gallery-image"/>
-                                                <div class="overlay">
+                                            <div className="column">
+                                                <img src={a.photo_url} className="gallery-image"/>
+                                                <div className="overlay">
                                                     <button className = "btn-danger" onClick = {this.deleteProject.bind(this, a.id)}><i className ="fa fa-trash-o" aria-hidden="true"></i></button>
-                                                    <div><Link to ={ `/gallery/project/${a.id}`} class = "text-gal">{a.name_hy}</Link></div>
+                                                    <div><Link to ={ `/gallery/project/${a.id}`} className = "text-gal">{a.name_hy}</Link></div>
                                                 </div>
                                             </div>
                                         )
@@ -130,15 +128,15 @@ class Gallery extends React.Component{
                             </div>
                         </>:
                         <>
-                            <div class="gallery-main"> 
+                            <div className="gallery-main"> 
                                 {
                                     this.state.gallery_en.map(a => {
                                         return (
-                                            <div class="column">
-                                                <img src={a.photo_url} class="gallery-image"/>
-                                                <div class="overlay">
+                                            <div className="column">
+                                                <img src={a.photo_url} className="gallery-image"/>
+                                                <div className="overlay">
                                                     <button className = "btn-danger" onClick = {this.deleteProject.bind(this, a.id)}><i className ="fa fa-trash-o" aria-hidden="true"></i></button>
-                                                    <div><Link to ={ `/gallery/project/${a.id}`} class = "text-gal">{a.name_en}</Link></div>
+                                                    <div><Link to ={ `/gallery/project/${a.id}`} className = "text-gal">{a.name_en}</Link></div>
                                                 </div>
                                             </div>
                                         )
